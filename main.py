@@ -44,3 +44,5 @@ with torch.no_grad():
     x_tst_lengths = torch.LongTensor([stn_tst.size(0)]).cuda()
     audio = net_g.infer(x_tst, x_tst_lengths, noise_scale=.667, noise_scale_w=1, length_scale=1.2)[0][0,0].data.cpu().float().numpy()
 ipd.display(ipd.Audio(audio, rate=hps.data.sampling_rate, normalize=False))
+
+write('output.wav', hps.data.sampling_rate, audio)
